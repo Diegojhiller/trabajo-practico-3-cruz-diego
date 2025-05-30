@@ -1,13 +1,11 @@
-// Arreglo donde guardaremos los personajes de la API
+
 let personajesDB = [];
 let contenedorResultados;
 
-// Función que limpia el contenedor de resultados
 function limpiarVista() {
   contenedorResultados.innerHTML = "";
 }
 
-// Función que muestra los personajes en tarjetas
 function pintarPersonajes(lista) {
   limpiarVista();
 
@@ -28,7 +26,7 @@ function pintarPersonajes(lista) {
   });
 }
 
-// Función para mostrar mensajes de advertencia o error
+
 function mostrarAviso(texto) {
   const aviso = document.getElementById("aviso");
   aviso.innerHTML = `
@@ -43,7 +41,7 @@ function limpiarAviso() {
   aviso.innerHTML = "";
 }
 
-// Función para cargar todos los personajes al inicio
+
 async function cargarTodosLosPersonajes() {
   try {
     const resp = await fetch("https://dragonball-api.com/api/characters");
@@ -56,7 +54,7 @@ async function cargarTodosLosPersonajes() {
   }
 }
 
-// Función para buscar personajes filtrando localmente
+
 function filtrarPersonajes(nombre) {
   limpiarAviso();
   limpiarVista();
@@ -71,14 +69,14 @@ function filtrarPersonajes(nombre) {
   }
 }
 
-// Evento al cargar todo el HTML
+
 document.addEventListener("DOMContentLoaded", () => {
   const inputNombre = document.getElementById("campoBusqueda");
   const btnBuscar = document.getElementById("btnBuscar");
   const btnLimpiar = document.getElementById("btnLimpiar");
   contenedorResultados = document.getElementById("zonaResultados");
 
-  // Buscar con botón
+  
   btnBuscar.addEventListener("click", () => {
     const texto = inputNombre.value.trim();
     if (texto === "") {
@@ -88,20 +86,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Buscar con Enter
+  
   inputNombre.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       btnBuscar.click();
     }
   });
 
-  // Limpiar búsqueda
+  
   btnLimpiar.addEventListener("click", () => {
     limpiarAviso();
     inputNombre.value = "";
     pintarPersonajes(personajesDB);
   });
 
-  // Cargar personajes al iniciar
+  
   cargarTodosLosPersonajes();
 });
