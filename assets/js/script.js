@@ -1,15 +1,11 @@
-// Arreglo donde vamos a guardar todos los personajes obtenidos de la API
+
 let personajesDB = [];
 
-// Referencia al contenedor donde mostraremos los resultados
 let contenedorResultados;
-
-// Esta función borra los personajes mostrados anteriormente
 function limpiarVista() {
   contenedorResultados.innerHTML = "";
 }
 
-// Esta función toma una lista de personajes y crea tarjetas para mostrarlos
 function pintarPersonajes(lista) {
   limpiarVista();
 
@@ -30,7 +26,6 @@ function pintarPersonajes(lista) {
   });
 }
 
-// Esta función muestra un mensaje de error o información
 function mostrarAviso(texto) {
   const aviso = document.getElementById("aviso");
   aviso.innerHTML = `
@@ -40,33 +35,31 @@ function mostrarAviso(texto) {
   `;
 }
 
-// Esta función borra el mensaje de aviso si hay uno
 function limpiarAviso() {
   const aviso = document.getElementById("aviso");
   aviso.innerHTML = "";
 }
 
-// Esta función obtiene todos los personajes desde la API
 async function cargarTodosLosPersonajes() {
   try {
     const resp = await fetch("https://dragonball-api.com/api/characters");
     const data = await resp.json();
-    personajesDB = data.items; // Guardamos los personajes en nuestra variable global
-    pintarPersonajes(personajesDB); // Mostramos los personajes
+    personajesDB = data.items;
+    pintarPersonajes(personajesDB);
   } catch (err) {
     mostrarAviso("Error al obtener los personajes.");
     console.error("Falla al cargar personajes:", err);
   }
 }
 
-// Esta función busca personajes según un nombre
+
 async function filtrarPersonajes(nombre) {
   try {
     const resp = await fetch(`https://dragonball-api.com/api/characters?name=${nombre}`);
     const data = await resp.json();
 
     if (!data.items || data.items.length === 0) {
-      mostrarAviso("No se encontraron personajes con ese nombre.");
+      mostrarAviso("No se encontraron personajes con ese nombre, Insecto.");
     } else {
       pintarPersonajes(data.items);
     }
@@ -76,19 +69,16 @@ async function filtrarPersonajes(nombre) {
   }
 }
 
-// Esperamos que el HTML esté completamente cargado
 document.addEventListener("DOMContentLoaded", () => {
   const inputNombre = document.getElementById("campoBusqueda");
   const btnBuscar = document.getElementById("btnBuscar");
   const btnLimpiar = document.getElementById("btnLimpiar");
   contenedorResultados = document.getElementById("zonaResultados");
 
-  // Creamos un contenedor para mostrar mensajes
   let divAviso = document.createElement("div");
   divAviso.id = "aviso";
   btnBuscar.parentNode.parentNode.appendChild(divAviso);
 
-  // Evento al hacer clic en "Buscar"
   btnBuscar.addEventListener("click", () => {
     limpiarAviso();
     const texto = inputNombre.value.trim();
@@ -100,13 +90,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Evento al hacer clic en "Limpiar"
+
   btnLimpiar.addEventListener("click", () => {
     limpiarAviso();
     inputNombre.value = "";
-    pintarPersonajes(personajesDB); // Muestra todos nuevamente
+    pintarPersonajes(personajesDB); 
   });
 
-  // Cargamos los personajes al inicio
+  
   cargarTodosLosPersonajes();
 });
