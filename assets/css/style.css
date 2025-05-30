@@ -1,12 +1,15 @@
-
 body {
-  background-color: #4223cc;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url(/assets/css/dragon-ball-super-1600-x-900-.jpg);
+  background-size: cover;        
+  background-repeat: no-repeat;  
+  background-position: center;   
+  background-attachment: fixed;
 }
-
+ 
 h1 {
-  color: #ff6f00; /* Naranja tipo Dragon Ball */
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  color: #ab960a;
+  text-shadow: 5px 5px 6px rgba(0,0,0,0.2);
+
 }
 
 .card {
